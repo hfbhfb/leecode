@@ -13,7 +13,7 @@ func TestA01(t *testing.T) {
 
 	mmStr := []string{"abc", "c", "中文", "文"}
 
-	for i := 0; i < 30000000; i++ {
+	for i := 0; i < 90000000; i++ {
 		mmStr = append(mmStr, "abc")
 	}
 
@@ -52,7 +52,7 @@ func CountLettersCurrency(strs []string) LetterFre {
 
 	wg := sync.WaitGroup{}
 
-	// fmt.Println(len(strs))
+	fmt.Println("字符串长度:", len(strs))
 	// fmt.Println(cap(strs))
 	cpus := runtime.NumCPU()
 
@@ -118,7 +118,7 @@ func CountLettersCurrency(strs []string) LetterFre {
 
 	wg.Wait()
 	// fmt.Println(cpus)
-	fmt.Println(iDeal)
+	// fmt.Println(iDeal)
 	fmt.Println(retAll)
 	// ret := make(LetterFre)
 	return nil
