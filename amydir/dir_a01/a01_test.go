@@ -76,8 +76,8 @@ func CountLettersCurrency(strs []string) LetterFre {
 			ci <- strs[fromInt:endInt]
 		}
 
-		// fmt.Println(fromInt)
-		// fmt.Println(endInt)
+		fmt.Println(fromInt)
+		fmt.Println(endInt)
 
 		close(ci)
 
@@ -96,6 +96,14 @@ func CountLettersCurrency(strs []string) LetterFre {
 					}
 					for _, str := range strs {
 						for _, r := range str {
+
+							// 如果在这里操作,会30秒超时
+							// mu.Lock()
+							// for k, v := range ret {
+							// 	retAll[k] = v
+							// }
+							// mu.Unlock()
+
 							ret[r]++
 						}
 
