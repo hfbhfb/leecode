@@ -17,13 +17,13 @@ func TestA01(t *testing.T) {
 		mmStr = append(mmStr, "abc")
 	}
 
-	start := time.Now() // 获取当前时间
-	aa := CountLetters(mmStr)
+	start := time.Now()       // 获取当前时间
+	aa := CountLetters(mmStr) // 9千万条时候,5秒
 	elapsed := time.Now().Sub(start)
 	fmt.Println("该函数执行完成耗时：", elapsed)
 
-	start = time.Now() // 获取当前时间
-	bb := CountLettersCurrency(mmStr)
+	start = time.Now()                // 获取当前时间
+	bb := CountLettersCurrency(mmStr) // 9千万条时候,1秒
 	elapsed = time.Now().Sub(start)
 	fmt.Println("该函数执行完成耗时 Currency：", elapsed)
 	// t.Log(aa)
