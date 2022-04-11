@@ -2,6 +2,7 @@ package dira05
 
 import (
 	"fmt"
+	"runtime"
 	"strings"
 	"testing"
 )
@@ -131,6 +132,7 @@ func checkLoop(index int, mark []int) bool {
 }
 
 func AddIndex(index int, mark []int) {
+
 	flag := false
 	pos := -1
 	for i, v := range mark {
@@ -150,7 +152,13 @@ func AddIndex(index int, mark []int) {
 }
 
 func TestXxx(t *testing.T) {
-
+	fmt.Println(runtime.GOMAXPROCS(0))
+	fmt.Println(runtime.GOMAXPROCS(0))
+	fmt.Println(runtime.GOMAXPROCS(0))
+	fmt.Println(runtime.GOMAXPROCS(0))
+	fmt.Println(runtime.GOMAXPROCS(0))
+	fmt.Println(runtime.GOMAXPROCS(0))
+	fmt.Println(runtime.GOMAXPROCS(0))
 	type Point struct {
 		start string
 		end   string

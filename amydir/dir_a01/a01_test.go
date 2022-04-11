@@ -13,13 +13,26 @@ func TestA01(t *testing.T) {
 
 	mmStr := []string{"abc", "c", "中文", "文"}
 
-	for i := 0; i < 90000000; i++ {
-		mmStr = append(mmStr, "abc")
+	start := time.Now() // 获取当前时间
+	elapsed := time.Now().Sub(start)
+
+	more := 90080000
+	mmStr = make([]string, more)
+	for i := 0; i < more; i++ {
+		mmStr[i] = "abc"
 	}
 
-	start := time.Now()       // 获取当前时间
+	/*
+		for i := 0; i < more; i++ {
+			mmStr = append(mmStr, "abc")
+		}
+	*/
+	elapsed = time.Now().Sub(start)
+	fmt.Println("申请空间:", elapsed)
+
+	start = time.Now()        // 获取当前时间
 	aa := CountLetters(mmStr) // 9千万条时候,5秒
-	elapsed := time.Now().Sub(start)
+	elapsed = time.Now().Sub(start)
 	fmt.Println("该函数执行完成耗时：", elapsed)
 
 	start = time.Now()                // 获取当前时间
