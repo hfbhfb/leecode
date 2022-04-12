@@ -3,7 +3,7 @@
 
 
 
-git commit -a -m "提交: 匿名组合有隐式的名字, 理解为 编译器去生成额外的包装方法来委托已经声明好的方法 " && git push origin master
+git commit -a -m "提交: 在并发的时候,slice 和 map 有不同的表现形式  " && git push origin master
 
 
 # leecode题解
