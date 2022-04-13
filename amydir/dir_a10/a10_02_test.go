@@ -8,8 +8,11 @@ import (
 func withPanic() {
 	fmt.Println("1111")
 	defer func() {
-		fmt.Println("222")
-		recover()
+		if r := recover(); r != nil {
+			fmt.Println(r)
+		}
+		// fmt.Println("222")
+		// recover()
 	}()
 	m := 9
 	n := 0
