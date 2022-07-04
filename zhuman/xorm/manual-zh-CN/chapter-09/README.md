@@ -6,3 +6,4 @@
 sql = "update `userinfo` set username=? where id=?"
 res, err := engine.Exec(sql, "xiaolun", 1) 
 ```
+
