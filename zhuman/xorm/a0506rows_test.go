@@ -118,3 +118,24 @@ func TestRows(t *testing.T) {
 
 
 */
+
+// 选择部分列
+func TestRowsColumn(t *testing.T) {
+	user := new(User)
+	rows, err := engine.Where("id >?", 1).Cols("id").Rows(user)
+	if err != nil {
+		log.Println(err.Error())
+		t.Errorf(err.Error())
+	}
+	defer rows.Close()
+	for rows.Next() {
+		err = rows.Scan(user)
+		//...
+		if err != nil {
+			log.Println(err.Error())
+		}
+		log.Println(user)
+		log.Println("第一条就退出了")
+		break
+	}
+}
