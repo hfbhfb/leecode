@@ -98,6 +98,7 @@ func init() {
 	log.Println("完成数据库的初始化和同步")
 }
 
+// xorm 最佳实践 基准测试
 func TestHelloWorldXorm(t *testing.T) {
 
 }

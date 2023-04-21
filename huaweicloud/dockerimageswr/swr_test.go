@@ -20,6 +20,7 @@ func ResponseHandlerSWR(response http.Response) {
 	fmt.Println(response)
 }
 
+// 华为云sdk 最佳实践 基准测试
 // User Name,Access Key Id,Secret Access Key
 // "hw098403457",MIKVPONSDECXIBX01YDM,lskMAw3N6GJIF2XFTqpwwNbxQ9LVVRwE9SJHj9Hp
 func TestMyAccountSWR(t *testing.T) {

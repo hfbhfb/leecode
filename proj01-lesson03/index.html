@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>水位触发限定小工具: 原理是DeamonSet(cpu和内存未limit)运行的后端接收相应指令</div>
+
+      <br />
+
+      <div>
+        状态：{{status_running==1?"未开始":"运行中"}} 时间轴:{{flowtime}}秒
+        <button @click="onFnStartOrStop">{{status_running==1?"开始":"停止"}}</button>
+      </div>
+
+      <br />
+
+      水位触发内容 (共三种情形可设定)：
+      <select v-model="typecheck">
+        <option value="1">CPU指标</option>
+        <option value="2">内存指标</option>
+        <option value="3">访问量指标</option>
+      </select>
+
+      <div v-if="typecheck == 1">
+        <div style="border-bottom: 1px solid rgb(20, 70, 135);padding: 10px;">
+
+        CPU设定水位：
+        <select v-model="cpuchecktype" >
+          <option value="1">按时间序:手动</option>
+          <option value="2">按Node节点加入的个数设定水位</option>
+        </select>
+        </div>
+
+        <div></div>
+
+
+        <div v-if="cpuchecktype == 1">
+          <div v-for="(val,key,i) in cpuarr1" :key="i">
+            时间节点(秒): 
+            <input type="text" v-model="val.timeflow"></input>
+            目标cpu占用率(水位): 
+            <input type="text" v-model="val.cpunum"></input>
+            <!-- {{val.timeflow}} 目标cpu占用率(水位): {{val.cpunum}} -->
+          </div>
+        </div>
+
+        <div v-if="cpuchecktype == 2"></div>
+      </div>
+      <div v-if="typecheck == 2">
+        <div>内存设定水位：</div>
+      </div>
+      <div v-if="typecheck == 3">
+        <div>并发服务的访问量：</div>
+      </div>
+    </div>
+  </body>
+  <script src="./vue2.7.9.js"></script>
+  <script src="./axios.min.js"></script>
+  <script>
+    // 2. 声明一个vue对象，这个对象可以有多个，但对象名必须保持唯一
+    var vm = new Vue({
+      el: "#app", // 设置当前vue对象要控制的标签范围
+      data: {
+        // data中是要展示的数据
+        msg: "hello world888",
+        typecheck: 1,
+        cpuchecktype: 1,
+        memchecktype: 1,
+
+        status_running: 1, // 1:未开始 2:正在进行
+        flowtime: 0, // 时间流失,以秒记
+
+        // cpu手动(类型1),分时间点
+        cpuarr1: [
+          {
+            timeflow: "10", //秒数
+            cpunum: "30", //水位
+          },
+          {
+            timeflow: "30", //秒数
+            cpunum: "50", //水位
+          },
+          {
+            timeflow: "60", //秒数
+            cpunum: "70", //水位
+          },
+          {
+            timeflow: "120", //秒数
+            cpunum: "70", //水位
+          },
+          {
+            timeflow: "180", //秒数
+            cpunum: "10", //水位
+          },
+          {
+            timeflow: "60", //秒数
+            cpunum: "70", //水位
+          },
+          {
+            timeflow: "60", //秒数
+            cpunum: "70", //水位
+          },
+          {
+            timeflow: "60", //秒数
+            cpunum: "70", //水位
+          },
+          {
+            timeflow: "60", //秒数
+            cpunum: "70", //水位
+          },
+          
+        ],
+
+        cpuarr2: [
+          {
+            nodenum: 4, //node数小于5的时候
+            cpunum: 90, //水位
+          },
+          {
+            nodenum: 6, //node数
+            cpunum: 70, //水位
+          },
+          {
+            nodenum: 8, //node
+            cpunum: 30, //水位
+          },
+          {
+            nodenum: 0, //node
+            cpunum: 30, //水位
+          },
+          {
+            nodenum: 0, //node
+            cpunum: 30, //水位
+          },
+          {
+            nodenum: 0, //node
+            cpunum: 30, //水位
+          },
+          {
+            nodenum: 0, //node
+            cpunum: 30, //水位
+          },
+          {
+            nodenum: 0, //node
+            cpunum: 30, //水位
+          },
+        ],
+      },
+      methods: {
+        onFnStartOrStop() {
+          if (this.status_running == 1) {
+            this.status_running = 2;
+          } else {
+            this.status_running = 1;
+          }
+        },
+      },
+      watch: {
+        typecheck(newVal, oldVal) {
+          // var url = "https://www.baidu.com/";
+          var url = "/helloworld";
+          // var paramsobj = {name:'zs',age:20};
+          var paramsobj = {};
+          axios.get(url, { params: paramsobj }).then(function (res) {
+            var data = res.data;
+            console.log(data);
+          });
+        },
+      },
+    });
+  </script>
+</html>
